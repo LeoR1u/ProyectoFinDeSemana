@@ -1,65 +1,50 @@
 /**
- * Header — barra institucional superior con menú responsive.
- *
- * Reutilizable en cualquier layout (auth y el futuro main):
- * - Pantallas >= lg: muestra el logo y los enlaces en fila.
- * - Pantallas < lg: muestra el logo y un botón hamburguesa que despliega un
- *   menú compacto alineado a la derecha, con animación de caída y una línea
- *   divisoria blanca entre los enlaces.
+ * Barra institucional: recupera la composición original para la vista de acceso.
+ * Cuando hay sesión, sustituye enlaces decorativos por la identidad del usuario.
  */
 
 import { useState } from 'react'
-import { Menu, Close } from '@carbon/icons-react'
+import { Close, Menu } from '@carbon/icons-react'
 import gobiernoBlanco from '@/assets/logos/Logo-Gobierno-2025.svg'
 
-const Header = () => {
-  /* Controla la apertura/cierre del menú móvil (solo aplica en < lg). */
-  const [menuOpen, setMenuOpen] = useState(false)
+/** Conserva el menú móvil original para la pantalla pública. */
+const Header = ({ usuario, alCerrarSesion }) => {
+  const [menuAbierto, setMenuAbierto] = useState(false)
 
-  const toggleMenu = () => setMenuOpen((v) => !v)
+  /** Alterna exclusivamente el menú de la versión móvil sin afectar la sesión. */
+  const alternarMenu = () => setMenuAbierto((abierto) => !abierto)
 
   return (
-
     <>
-    
       <div className="relative">
-        {/* Barra institucional superior */}
         <div className="flex w-full items-center justify-between bg-guinda-900 px-4 py-3 text-white sm:px-14">
           <div className="h-full">
-            <img src={gobiernoBlanco} alt="ANAM" className="h-full w-auto object-contain" />
+            <img src={gobiernoBlanco} alt="Gobierno de México" className="h-full w-auto object-contain" />
           </div>
 
-          {/* Botón hamburguesa — visible solo en pantallas pequeñas (< lg) */}
-          <button
-            type="button"
-            onClick={toggleMenu}
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            className="md:hidden cursor-pointer"
-          >
-            {menuOpen ? <Close size={24} /> : <Menu size={24} />}
-          </button>
-
-          {/* Enlaces — en fila, siempre visibles en pantallas grandes (>= lg) */}
-          <div className="hidden items-center gap-3 text-sm md:flex">
-            <p>Trámites</p>
-            <p>Gobierno</p>
-          </div>
+          {usuario ? (
+            <div className="flex items-center gap-3 text-right">
+              <div className="hidden sm:block"><p className="text-xs text-white/75">Módulo de Actas Nacionales</p><p className="text-sm font-semibold">{usuario.nombre}</p></div>
+              <button type="button" onClick={alCerrarSesion} className="rounded-md border border-white/60 px-3 py-1.5 text-sm font-semibold transition hover:bg-white hover:text-guinda-900">Salir</button>
+            </div>
+          ) : (
+            <>
+              {/* El menú móvil se mantiene igual que en el diseño de acceso inicial. */}
+              <button type="button" onClick={alternarMenu} aria-expanded={menuAbierto} aria-label={menuAbierto ? 'Cerrar menú' : 'Abrir menú'} className="cursor-pointer md:hidden">
+                {menuAbierto ? <Close size={24} /> : <Menu size={24} />}
+              </button>
+              <div className="hidden items-center gap-3 text-sm md:flex"><p>Trámites</p><p>Gobierno</p></div>
+            </>
+          )}
         </div>
 
-        {/* Menú móvil desplegable — absoluto bajo el botón, con animación de caída */}
-        {menuOpen && (
-          <div className="absolute w-full right-0 top-full z-40 bg-guinda-900  py-4 text-sm text-white shadow-lg md:hidden animate-slide-down">
-            <div className="flex flex-col items-center gap-3">
-              <p>Trámites</p>
-              <span className="h-px w-full bg-white/40" />
-              <p>Gobierno</p>
-            </div>
+        {!usuario && menuAbierto && (
+          <div className="absolute right-0 top-full z-40 w-full animate-slide-down bg-guinda-900 py-4 text-sm text-white shadow-lg md:hidden">
+            <div className="flex flex-col items-center gap-3"><p>Trámites</p><span className="h-px w-full bg-white/40" /><p>Gobierno</p></div>
           </div>
         )}
       </div>
-
-      {/* Franja decorativa */}
+      {/* Altura original de la franja decorativa del encabezado. */}
       <div className="h-12 w-full bg-guinda-950" />
     </>
   )

@@ -1,21 +1,17 @@
-/**
- * main.jsx — punto de entrada de la aplicación.
- *
- * Envuelve el router con <AuthProvider> para que el estado de sesión esté
- * disponible en todo el árbol (login, guard de rutas, dashboard).
- */
+/** Punto de entrada del Módulo de Actas Nacionales. */
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import './index.css'
 import { router } from '@/router'
-import { AuthProvider } from '@/context/auth/AuthProvider'
+import { AppProvider } from '@/context/AppContext'
 
+/** El proveedor mantiene el prototipo local disponible para cada ruta. */
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
+    <AppProvider>
       <RouterProvider router={router} />
-    </AuthProvider>
+    </AppProvider>
   </StrictMode>,
 )
