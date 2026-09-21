@@ -1,111 +1,156 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import "tailwindcss";
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@theme {
+  --font-sans: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* =========================================================
+   VERDE
+   Paleta institucional de Presidencia
+   ========================================================= */
+  /* Verde muy claro - Fondos suaves, superficies y estados sutiles */
+  --color-verde-100: #E0E9E8;
+  /* Verde claro - Fondos secundarios y elementos decorativos */
+  --color-verde-200: #B3C8C6;
+  /* Verde medio claro - Bordes suaves y elementos secundarios */
+  --color-verde-300: #82A4A0;
+  /* Verde medio - Elementos visuales y estados secundarios */
+  --color-verde-400: #51807A;
+  /* Verde oficial - Color principal de la paleta verde */
+  --color-verde-500: #004D40;
+  /* Verde oscuro - Botones, enlaces y elementos interactivos */
+  --color-verde-600: #004339;
+  /* Verde muy oscuro - Estados hover y elementos destacados */
+  --color-verde-700: #003931;
+  /* Verde oscuro profundo - Íconos y texto sobre fondos claros */
+  --color-verde-800: #002F2A;
+  /* Verde más oscuro - Alto contraste y elementos institucionales */
+  --color-verde-900: #001D1A;
+  /* =========================================================
+   GUINDA
+   Paleta institucional de Presidencia
+   ========================================================= */
+  /* Guinda muy claro - Fondos suaves y estados sutiles */
+  --color-guinda-100: #F3E4E9;
+  /* Guinda claro - Fondos secundarios y superficies */
+  --color-guinda-200: #E1BDC9;
+  /* Guinda claro medio - Bordes y elementos secundarios */
+  --color-guinda-300: #CE92A6;
+  /* Guinda medio claro - Elementos visuales */
+  --color-guinda-400: #BA6783;
+  /* Guinda medio - Elementos secundarios y destacados */
+  --color-guinda-500: #A84565;
+  /* Guinda oficial - Color principal institucional */
+  --color-guinda-600: #9B2247;
+  /* Guinda oscuro - Hover y estados activos */
+  --color-guinda-700: #8E1D3F;
+  /* Guinda muy oscuro - Botones y elementos destacados */
+  --color-guinda-800: #781838;
+  /* Guinda oficial oscuro - Íconos, textos y elementos de alto contraste */
+  --color-guinda-900: #611232;
+  /* Guinda más oscuro - Máximo contraste y elementos institucionales */
+  --color-guinda-950: #4A0C26;
+  /* =========================================================
+   DORADO
+   Paleta institucional de Presidencia
+   ========================================================= */
+  /* Dorado muy claro - Fondos suaves */
+  --color-dorado-100: #F6F2EA;
+  /* Dorado claro - Fondos secundarios */
+  --color-dorado-200: #E4D9C0;
+  /* Dorado claro medio - Bordes y elementos secundarios */
+  --color-dorado-300: #DBCCAB;
+  /* Dorado medio claro - Elementos visuales */
+  --color-dorado-400: #C9B280;
+  /* Dorado medio - Elementos destacados */
+  --color-dorado-500: #B79956;
+  /* Dorado oficial - Color principal para acentos dorados */
+  --color-dorado-600: #A57F2C;
+  /* Dorado oscuro - Hover y estados activos */
+  --color-dorado-700: #846623;
+  /* Dorado muy oscuro - Íconos y elementos de alto contraste */
+  --color-dorado-800: #634C1A;
+  /* Dorado oscuro profundo - Texto y elementos institucionales */
+  --color-dorado-900: #423312;
+  /* Dorado más oscuro - Máximo contraste */
+  --color-dorado-950: #32260D;
+  /* =========================================================
+   NEUTROS
+   Colores base para estructura, texto y superficies
+   ========================================================= */
+  /* Gris muy claro - Fondo general del sitio (Body) */
+  --color-neutro-200: #F9F9F9;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+  /* Gris claro - Bordes de bajo contraste y divisores */
+  --color-neutro-400: #DDDDDD;
+
+  /* Gris - Texto deshabilitado */
+  --color-neutro-500: #AAAAAA;
+
+  /* Gris medio - Bordes de alto contraste */
+  --color-neutro-600: #767676;
+
+  /* Negro/gris muy oscuro - Texto principal e íconos */
+  --color-neutro-800: #161A1D;
+  /* =========================================================
+   VALIDACIÓN
+   Colores semánticos para estados del sistema
+   ========================================================= */
+  /* Error - Fondo de mensajes de error */
+  --color-error-100: #FAE5E5;
+  /* Error - Texto, íconos y bordes de error */
+  --color-error-500: #9B0F15;
+  /* Éxito - Fondo de mensajes de éxito */
+  --color-exito-100: #F0FAF5;
+  /* Éxito - Texto, íconos y bordes de éxito */
+  --color-exito-500: #086308;
+  /* Informativo - Fondo de mensajes informativos */
+  --color-informativo-100: #EDF2FE;
+  /* Informativo - Texto, íconos y bordes informativos */
+  --color-informativo-500: #224497;
+  /* Alerta - Fondo de mensajes de advertencia */
+  --color-alerta-100: #FFEB99;
+  /* Alerta - Texto, íconos y bordes de advertencia */
+  --color-alerta-500: #684700;
+
+  /* Texto Label*/
+  --color-texto-label: #AE1C22;
+
+  /* Animación del menú móvil: desliza hacia abajo desde la barra superior */
+  --animate-slide-down: slide-down 0.3s ease-out;
+
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/Noto Sans/NotoSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
-body {
-  margin: 0;
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/Noto Sans/NotoSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./assets/fonts/Noto Sans/NotoSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
