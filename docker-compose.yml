@@ -25,6 +25,15 @@ services:
     build: ./frontend
     user: "1000:1000"
     command: npm run dev -- --host
+    
+    watch:
+      - action: sync
+        path: ./frontend
+        target: /src
+        ignore:
+          - node_modules/
+      - action: rebuild
+        path: package.json
     volumes:
       - ./frontend:/app:z
     ports:
